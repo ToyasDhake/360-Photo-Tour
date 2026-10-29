@@ -20,6 +20,7 @@
     "IMG_20240715_222359_00_merged.jpg": -150,
     "IMG_20240715_222449_00_merged.jpg": 102,
     "IMG_20240715_222534_00_merged.jpg": -76,
+    "IMG_20240715_222623_00_merged.jpg": 106,
     "IMG_20240715_222811_00_merged.jpg": -17,
     "IMG_20240715_222914_00_merged.jpg": 102,
     "IMG_20240715_223002_00_merged.jpg": -82,
@@ -28,7 +29,12 @@
     "IMG_20240715_223513_00_merged.jpg": 102,
     "IMG_20240715_223636_00_merged.jpg": -67,
     "IMG_20240715_223747_00_merged.jpg": 9,
-    "IMG_20240715_222623_00_merged.jpg": 106
+    "IMG_20240715_225824_00_merged.jpg": 171,
+    "IMG_20240715_225521_00_merged.jpg": 91,
+    "IMG_20240715_224305_00_merged.jpg": 126,
+    "IMG_20240715_223935_00_merged.jpg": 126,
+    "IMG_20240715_224407_00_merged.jpg": -74,
+    "IMG_20240715_224640_00_merged.jpg": 134
   },
   "spots": [
     {
@@ -77,7 +83,8 @@
         "mvu3qwu6pgv4dz",
         "mvu3sqxu12anne",
         "mvu3r6wtelt23p",
-        "mvu3ranouts5hb"
+        "mvu3ranouts5hb",
+        "mvu71trtfbqj03"
       ]
     },
     {
@@ -93,7 +100,8 @@
         "mvu3qlau4xyj2f",
         "mvu3sqxu12anne",
         "mvu3r6wtelt23p",
-        "mvu3ranouts5hb"
+        "mvu3ranouts5hb",
+        "mvu71trtfbqj03"
       ]
     },
     {
@@ -110,7 +118,9 @@
         "mvu3qwu6pgv4dz",
         "mvu3t5yomm0z5e",
         "mvu3p9a4nucbm7",
-        "mvu3qlau4xyj2f"
+        "mvu3qlau4xyj2f",
+        "mvu71trtfbqj03",
+        "mvu755zhxp2pu5"
       ]
     },
     {
@@ -126,7 +136,9 @@
         "mvu3t5yomm0z5e",
         "mvu3qlau4xyj2f",
         "mvu3qwu6pgv4dz",
-        "mvu3sqxu12anne"
+        "mvu3sqxu12anne",
+        "mvu71trtfbqj03",
+        "mvu755zhxp2pu5"
       ]
     },
     {
@@ -145,14 +157,15 @@
         "mvu3p9a4nucbm7",
         "mvu3owigz52o5p",
         "mvu3ranouts5hb",
-        "mvu3tr1mzm0afv"
+        "mvu3tr1mzm0afv",
+        "mvu71trtfbqj03"
       ]
     },
     {
       "id": "mvu3t5yomm0z5e",
       "name": "Pin 8",
       "nx": 0.3554321342127608,
-      "ny": 0.48027354198044664,
+      "ny": 0.4800949705518752,
       "yaw": 0,
       "day": "IMG_20240715_181409_00_merged.jpg",
       "night": "IMG_20240715_223002_00_merged.jpg",
@@ -166,7 +179,11 @@
         "mvu3ranouts5hb",
         "mvu3r6wtelt23p",
         "mvu3owigz52o5p",
-        "mvu3ww4zilf5st"
+        "mvu3ww4zilf5st",
+        "mvu71trtfbqj03",
+        "mvu755zhxp2pu5",
+        "mvu78onk25kslj",
+        "mvu7bmi5v30fgl"
       ]
     },
     {
@@ -183,7 +200,8 @@
         "mvu3tzua64q67n",
         "mvu3u36xirjace",
         "mvu3ww4zilf5st",
-        "mvu3sqxu12anne"
+        "mvu3sqxu12anne",
+        "mvu7bmi5v30fgl"
       ]
     },
     {
@@ -226,7 +244,9 @@
         "mvu3t5yomm0z5e",
         "mvu3ww4zilf5st",
         "mvu3tr1mzm0afv",
-        "mvu3tzua64q67n"
+        "mvu3tzua64q67n",
+        "mvu78onk25kslj",
+        "mvu7bmi5v30fgl"
       ]
     },
     {
@@ -241,7 +261,69 @@
         "mvu3wre3kxe8sg",
         "mvu3tr1mzm0afv",
         "mvu3t5yomm0z5e",
-        "mvu3tzua64q67n"
+        "mvu3tzua64q67n",
+        "mvu78onk25kslj"
+      ]
+    },
+    {
+      "id": "mvu71trtfbqj03",
+      "name": "Pin 14",
+      "nx": 0.3177420044817151,
+      "ny": 0.43449080997942124,
+      "yaw": 88,
+      "day": null,
+      "night": "IMG_20240715_225824_00_merged.jpg",
+      "links": [
+        "mvu3ranouts5hb",
+        "mvu3r6wtelt23p",
+        "mvu3sqxu12anne",
+        "mvu3qwu6pgv4dz",
+        "mvu3t5yomm0z5e",
+        "mvu3qlau4xyj2f",
+        "mvu755zhxp2pu5"
+      ]
+    },
+    {
+      "id": "mvu755zhxp2pu5",
+      "name": "Pin 15",
+      "nx": 0.30874200448171507,
+      "ny": 0.3573479528365642,
+      "yaw": 89,
+      "day": null,
+      "night": "IMG_20240715_225521_00_merged.jpg",
+      "links": [
+        "mvu3ranouts5hb",
+        "mvu3r6wtelt23p",
+        "mvu71trtfbqj03",
+        "mvu3t5yomm0z5e"
+      ]
+    },
+    {
+      "id": "mvu78onk25kslj",
+      "name": "Pin 16",
+      "nx": 0.4125941692311167,
+      "ny": 0.3347402367476293,
+      "yaw": -92,
+      "day": null,
+      "night": "IMG_20240715_224407_00_merged.jpg",
+      "links": [
+        "mvu3wre3kxe8sg",
+        "mvu3t5yomm0z5e",
+        "mvu3ww4zilf5st"
+      ]
+    },
+    {
+      "id": "mvu7bmi5v30fgl",
+      "name": "Pin 17",
+      "nx": 0.3851495848617622,
+      "ny": 0.44187858117246076,
+      "yaw": 90,
+      "day": null,
+      "night": "IMG_20240715_224640_00_merged.jpg",
+      "links": [
+        "mvu3t5yomm0z5e",
+        "mvu3wre3kxe8sg",
+        "mvu3tr1mzm0afv"
       ]
     }
   ],
