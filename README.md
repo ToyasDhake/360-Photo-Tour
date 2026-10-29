@@ -89,7 +89,7 @@ Open the editor.
 3. Select a photo in the left tray and choose **Set as day** or **Set as night**. A stop can have one photo, or both.
 4. Drag the arrow, or use **Direction**, so the place faces the same way the camera was facing on the plan. Day and night share that direction. Under each photo, **Look** turns the picture so the two shots of one place line up. **Step inside**, look toward the next stop, and use **This view points to the top** if you would rather set the plan direction from the photo itself.
 5. Under **Jumps from here**, choose which other stops can be walked to from this photo. A jump is one way: the way back is a jump on the other stop.
-6. **Step inside** and click a marker. It should sit in the part of the room where that next stop actually is. If it does not, adjust the arrow and the pin, then look again.
+6. **Step inside** and click a marker. It sits on the floor where the next photo was taken. Drag that pin closer to lower the marker, or farther to raise it. Turn the arrow to move it left or right.
 
 Edits save on their own into `content/tour.json`. **Reset layout** puts every photo on its own pin again. **Remove all pins** clears the stops and leaves the photos in the tray.
 

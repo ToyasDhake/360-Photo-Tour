@@ -2,6 +2,10 @@ const WORLD_W = 1000;
 const DEFAULT_LINK = 0.14;
 const BOARD_STEP = 0.25;
 const BOARD_MAX = 2;
+// Camera height as a fraction of the plan width. A linked pin is a point on the
+// floor, so its distance on the plan sets how far below the horizon its marker sits.
+const PLAN_EYE = 0.045;
+const EYE_METERS = 1.55;
 const adminMode = /^\/admin\/?$/.test(window.location.pathname);
 
 const $ = (id) => document.getElementById(id);
@@ -135,7 +139,7 @@ let viewerPlaceId = null;
 let viewerTime = "day";
 let viewerFile = null;
 let placedAt = 0;
-const MAP_HINT = "Click Add pin, then click the plan. Drag a pin to move it. Drag the arrow to turn the place. Expand adds space around the grid.";
+const MAP_HINT = "Click Add pin, then click the plan. Drag a pin to move it. Drag the arrow to turn the place. Drag a linked pin closer or farther to move its marker in the photo. Expand adds space around the grid.";
 let loadToken = 0;
 let glContext = null;
 let miniGeom = null;
@@ -170,10 +174,28 @@ function newId() {
   return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 }
 
-function planBearing(a, b) {
+function planDelta(a, b) {
+  const { base } = worldSize();
   const dx = b.nx - a.nx;
-  const dy = b.ny - a.ny;
+  const dy = (b.ny - a.ny) * (base.h / base.w);
+  return { dx, dy, ground: Math.hypot(dx, dy) };
+}
+
+function planBearing(a, b) {
+  const { dx, dy } = planDelta(a, b);
   return Math.atan2(dx, -dy);
+}
+
+function markerAim(from, to) {
+  const { dx, dy, ground } = planDelta(from, to);
+  const span = Math.max(ground, 0.004);
+  const slant = Math.hypot(span, PLAN_EYE);
+  return {
+    imageYaw: Math.atan2(dx, -dy) - (from.yaw * Math.PI) / 180,
+    imagePitch: -Math.atan2(PLAN_EYE, span),
+    meters: slant * (EYE_METERS / PLAN_EYE),
+    scale: clamp(0.105 / slant, 0.48, 1.45),
+  };
 }
 
 function photoNumber(file) {
@@ -1953,15 +1975,13 @@ function raySphere(origin, direction, center, radius) {
 function markerList() {
   const spot = viewerSpot();
   if (!spot) return [];
-  const forward = spot.yaw;
   return reachableNeighbors(spot, viewerTime).map((other) => {
-    const closeness = clamp(1 - dist(spot, other) / 0.45, 0, 1);
-    const imageYaw = planBearing(spot, other) - (forward * Math.PI) / 180;
-    const imagePitch = -0.36 - closeness * 0.2;
+    const aim = markerAim(spot, other);
     return {
       id: other.id,
       name: other.name,
-      panDir: dirFromYawPitch(imageYaw, imagePitch),
+      panDir: dirFromYawPitch(aim.imageYaw, aim.imagePitch),
+      distance: aim.meters,
     };
   });
 }
@@ -2099,8 +2119,8 @@ function collectControllerHits(frame) {
     const direction = vecNorm(quatRotate(pose.transform.orientation, [0, 0, -1]));
     let best = null;
     for (const marker of vr.markers) {
-      const { center } = markerPose(marker.panDir, 2.4);
-      const t = raySphere(origin, direction, center, 0.34);
+      const { center } = markerPose(marker.panDir, marker.distance);
+      const t = raySphere(origin, direction, center, Math.max(0.28, marker.distance * 0.16));
       if (t == null) continue;
       if (!best || t < best.t) best = { id: marker.id, t, source };
     }
@@ -2198,21 +2218,22 @@ function drawVrEye(view, rays, showHint) {
   }
   for (const marker of vr.markers) {
     const hot = aimed.has(marker.id);
-    const { refDir, center } = markerPose(marker.panDir, 2.4);
+    const { refDir, center } = markerPose(marker.panDir, marker.distance);
     const radius = hot ? 0.2 : 0.16;
     const { right, forward } = flatBasis(refDir, radius);
     const disc = [];
     pushQuad(disc, center, right, forward);
     drawMarkerMesh(disc, 0, hot ? [0.89, 0.53, 0.29, 0.92] : [0.95, 0.93, 0.88, 0.72], null);
-    const labelPos = vecAdd(center, [0, 0.2, 0]);
-    const basis = billboardBasis(labelPos, 0.34, 0.085);
+    const labelScale = marker.distance / 2.4;
+    const labelPos = vecAdd(center, [0, 0.2 * labelScale, 0]);
+    const basis = billboardBasis(labelPos, 0.34 * labelScale, 0.085 * labelScale);
     const label = [];
     pushQuad(label, labelPos, basis.right, basis.up);
     drawMarkerMesh(label, 1, [1, 1, 1, 1], labelTexture(marker.name || "Walk", false));
   }
 
   for (const ray of rays) {
-    const endDistance = ray.hit ? Math.min(ray.hit.t, 2.5) : 2.5;
+    const endDistance = ray.hit ? ray.hit.t : 3.2;
     const end = vecAdd(ray.origin, vecScale(ray.direction, endDistance));
     let side = vecCross(ray.direction, vecSub(vr.headPos, ray.origin));
     if (vecLen(side) < 1e-4) side = [1, 0, 0];
@@ -2363,7 +2384,6 @@ function syncHotspots() {
   }
   const width = els.pano.clientWidth;
   const height = els.pano.clientHeight;
-  const forward = spot.yaw;
   let visible = 0;
   neighbors.forEach((other, index) => {
     let element = hotspotEls.get(other.id);
@@ -2381,11 +2401,8 @@ function syncHotspots() {
     }
     element.querySelector(".name").textContent = other.name;
     element.setAttribute("aria-label", adminMode ? other.name : "Walk here");
-    const mapDist = dist(spot, other);
-    const closeness = clamp(1 - mapDist / 0.45, 0, 1);
-    const imageYaw = planBearing(spot, other) - (forward * Math.PI) / 180;
-    const imagePitch = -0.36 - closeness * 0.2;
-    const projected = projectDirection(imageYaw, imagePitch, look.yaw, look.pitch, look.fov, width, height);
+    const aim = markerAim(spot, other);
+    const projected = projectDirection(aim.imageYaw, aim.imagePitch, look.yaw, look.pitch, look.fov, width, height);
     if (!projected) {
       element.style.display = "none";
       return;
@@ -2395,8 +2412,7 @@ function syncHotspots() {
     element.style.left = `${projected.x}px`;
     element.style.top = `${projected.y}px`;
     element.style.zIndex = String(200 - index);
-    const scale = 0.62 + closeness * 0.55;
-    element.style.transform = `translate(-50%, -100%) scale(${scale})`;
+    element.style.transform = `translate(-50%, -100%) scale(${aim.scale})`;
   });
   els.noLinks.hidden = neighbors.length > 0;
   if (visible === 0 && neighbors.length > 0) els.noLinks.hidden = true;

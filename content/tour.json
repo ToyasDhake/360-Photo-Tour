@@ -34,14 +34,16 @@
     {
       "id": "mvu3owigz52o5p",
       "name": "Pin 1",
-      "nx": 0.34036288862765224,
-      "ny": 0.6274805892418669,
+      "nx": 0.33989391891158577,
+      "ny": 0.6181011949205377,
       "yaw": -1,
       "day": "IMG_20240715_180714_00_merged.jpg",
       "night": "IMG_20240715_222623_00_merged.jpg",
       "links": [
         "mvu3p9a4nucbm7",
-        "mvu3qlau4xyj2f"
+        "mvu3qlau4xyj2f",
+        "mvu3t5yomm0z5e",
+        "mvu3sqxu12anne"
       ]
     },
     {
@@ -54,7 +56,10 @@
       "night": "IMG_20240715_222811_00_merged.jpg",
       "links": [
         "mvu3owigz52o5p",
-        "mvu3qlau4xyj2f"
+        "mvu3qlau4xyj2f",
+        "mvu3sqxu12anne",
+        "mvu3t5yomm0z5e",
+        "mvu3r6wtelt23p"
       ]
     },
     {
@@ -68,7 +73,11 @@
       "links": [
         "mvu3p9a4nucbm7",
         "mvu3owigz52o5p",
-        "mvu3t5yomm0z5e"
+        "mvu3t5yomm0z5e",
+        "mvu3qwu6pgv4dz",
+        "mvu3sqxu12anne",
+        "mvu3r6wtelt23p",
+        "mvu3ranouts5hb"
       ]
     },
     {
@@ -80,32 +89,44 @@
       "day": "IMG_20240715_180337_00_merged.jpg",
       "night": "IMG_20240715_222449_00_merged.jpg",
       "links": [
-        "mvu3t5yomm0z5e"
+        "mvu3t5yomm0z5e",
+        "mvu3qlau4xyj2f",
+        "mvu3sqxu12anne",
+        "mvu3r6wtelt23p",
+        "mvu3ranouts5hb"
       ]
     },
     {
       "id": "mvu3r6wtelt23p",
       "name": "Pin 5",
-      "nx": 0.29631018137470905,
-      "ny": 0.35170218886087323,
+      "nx": 0.31665356206287765,
+      "ny": 0.3972032567781335,
       "yaw": -89,
       "day": "IMG_20240715_180144_00_merged.jpg",
       "night": "IMG_20240715_222359_00_merged.jpg",
       "links": [
         "mvu3sqxu12anne",
-        "mvu3ranouts5hb"
+        "mvu3ranouts5hb",
+        "mvu3qwu6pgv4dz",
+        "mvu3t5yomm0z5e",
+        "mvu3p9a4nucbm7",
+        "mvu3qlau4xyj2f"
       ]
     },
     {
       "id": "mvu3ranouts5hb",
       "name": "Pin 6",
-      "nx": 0.2668513619373184,
-      "ny": 0.30997601436385136,
+      "nx": 0.28966060695132567,
+      "ny": 0.3569448586655394,
       "yaw": -180,
       "day": "IMG_20240715_175925_00_merged.jpg",
       "night": "IMG_20240715_222315_00_merged.jpg",
       "links": [
-        "mvu3r6wtelt23p"
+        "mvu3r6wtelt23p",
+        "mvu3t5yomm0z5e",
+        "mvu3qlau4xyj2f",
+        "mvu3qwu6pgv4dz",
+        "mvu3sqxu12anne"
       ]
     },
     {
@@ -118,7 +139,13 @@
       "night": "IMG_20240715_222914_00_merged.jpg",
       "links": [
         "mvu3r6wtelt23p",
-        "mvu3t5yomm0z5e"
+        "mvu3t5yomm0z5e",
+        "mvu3qwu6pgv4dz",
+        "mvu3qlau4xyj2f",
+        "mvu3p9a4nucbm7",
+        "mvu3owigz52o5p",
+        "mvu3ranouts5hb",
+        "mvu3tr1mzm0afv"
       ]
     },
     {
@@ -134,7 +161,12 @@
         "mvu3tr1mzm0afv",
         "mvu3wre3kxe8sg",
         "mvu3qwu6pgv4dz",
-        "mvu3sqxu12anne"
+        "mvu3sqxu12anne",
+        "mvu3p9a4nucbm7",
+        "mvu3ranouts5hb",
+        "mvu3r6wtelt23p",
+        "mvu3owigz52o5p",
+        "mvu3ww4zilf5st"
       ]
     },
     {
@@ -149,27 +181,31 @@
         "mvu3t5yomm0z5e",
         "mvu3wre3kxe8sg",
         "mvu3tzua64q67n",
-        "mvu3u36xirjace"
+        "mvu3u36xirjace",
+        "mvu3ww4zilf5st",
+        "mvu3sqxu12anne"
       ]
     },
     {
       "id": "mvu3tzua64q67n",
       "name": "Pin 10",
-      "nx": 0.4076013988621911,
+      "nx": 0.40976233685922725,
       "ny": 0.5517601043553176,
       "yaw": 90,
       "day": "IMG_20240715_181910_00_merged.jpg",
       "night": "IMG_20240715_223417_00_merged.jpg",
       "links": [
         "mvu3tr1mzm0afv",
-        "mvu3u36xirjace"
+        "mvu3u36xirjace",
+        "mvu3wre3kxe8sg",
+        "mvu3ww4zilf5st"
       ]
     },
     {
       "id": "mvu3u36xirjace",
       "name": "Pin 11",
-      "nx": 0.40636930330483156,
-      "ny": 0.6122063412025455,
+      "nx": 0.40943063213396613,
+      "ny": 0.6114345776321755,
       "yaw": 1,
       "day": "IMG_20240715_182411_00_merged.jpg",
       "night": "IMG_20240715_223513_00_merged.jpg",
@@ -181,28 +217,31 @@
     {
       "id": "mvu3wre3kxe8sg",
       "name": "Pin 12",
-      "nx": 0.40415265692489,
-      "ny": 0.40044858819894213,
+      "nx": 0.4092920787450054,
+      "ny": 0.4088416822105446,
       "yaw": -180,
       "day": "IMG_20240715_182537_00_merged.jpg",
       "night": "IMG_20240715_223636_00_merged.jpg",
       "links": [
         "mvu3t5yomm0z5e",
         "mvu3ww4zilf5st",
-        "mvu3tr1mzm0afv"
+        "mvu3tr1mzm0afv",
+        "mvu3tzua64q67n"
       ]
     },
     {
       "id": "mvu3ww4zilf5st",
       "name": "Pin 13",
-      "nx": 0.40522766420083695,
-      "ny": 0.31365654290583317,
+      "nx": 0.40969979888469227,
+      "ny": 0.33488367627298904,
       "yaw": -90,
       "day": "IMG_20240715_194334_00_merged.jpg",
       "night": "IMG_20240715_223747_00_merged.jpg",
       "links": [
         "mvu3wre3kxe8sg",
-        "mvu3tr1mzm0afv"
+        "mvu3tr1mzm0afv",
+        "mvu3t5yomm0z5e",
+        "mvu3tzua64q67n"
       ]
     }
   ],
