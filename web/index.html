@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home tour</title>
+  <base href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <script>if (!/^\/admin\/?$/.test(location.pathname)) document.body.classList.add("visit");</script>
+  <div id="app">
+    <header class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Home tour</h1>
+          <p>Each pin is a place. Give it a day photo and a night photo.</p>
+        </div>
+      </div>
+      <div class="tools">
+        <button id="add-pin" class="btn" type="button">Add pin</button>
+        <label class="btn">
+          Add floor plan
+          <input id="floorplan-file" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+        </label>
+        <button id="remove-plan" class="btn ghost" type="button" hidden>Remove plan</button>
+        <button id="fit" class="btn ghost" type="button">Fit</button>
+        <div class="board-tools" role="group" aria-label="Expand the plan">
+          <span>Expand</span>
+          <button id="board-left" class="btn ghost" type="button" title="Add space on the left. Shift-click to remove it.">Left</button>
+          <button id="board-right" class="btn ghost" type="button" title="Add space on the right. Shift-click to remove it.">Right</button>
+          <button id="board-up" class="btn ghost" type="button" title="Add space above. Shift-click to remove it.">Above</button>
+          <button id="board-down" class="btn ghost" type="button" title="Add space below. Shift-click to remove it.">Below</button>
+        </div>
+        <button id="reset" class="btn ghost" type="button">Reset layout</button>
+        <button id="remove-all" class="btn ghost danger" type="button">Remove all pins</button>
+        <span id="save-state">Saved</span>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="tray">
+        <label class="search">
+          <span class="sr">Search photos</span>
+          <input id="search" type="search" placeholder="Search photos" />
+        </label>
+        <p id="tray-count" class="muted"></p>
+        <div id="tray-list"></div>
+      </aside>
+
+      <div class="map-pane">
+        <canvas id="map"></canvas>
+        <p id="map-hint">Click Add pin, then click the plan. Drag a pin to move it. Drag the arrow to turn the place. Expand adds space around the grid.</p>
+      </div>
+
+      <aside class="inspector">
+        <p id="inspector-empty" class="muted">Select a pin on the plan. Then choose a photo and mark it as the day or night shot.</p>
+        <div id="inspector" hidden>
+          <label class="field">
+            <span>Name</span>
+            <input id="insp-name" type="text" maxlength="48" />
+          </label>
+          <p id="photo-pick" class="muted"></p>
+          <div class="slots">
+            <div class="slot">
+              <div class="slot-head">
+                <span>Day</span>
+                <button id="clear-day" class="text-btn" type="button" hidden>Clear</button>
+              </div>
+              <img id="day-thumb" alt="" hidden />
+              <p id="day-label" class="muted"></p>
+              <button id="set-day" class="btn" type="button">Set as day</button>
+            </div>
+            <div class="slot">
+              <div class="slot-head">
+                <span>Night</span>
+                <button id="clear-night" class="text-btn" type="button" hidden>Clear</button>
+              </div>
+              <img id="night-thumb" alt="" hidden />
+              <p id="night-label" class="muted"></p>
+              <button id="set-night" class="btn" type="button">Set as night</button>
+            </div>
+          </div>
+          <label class="field" id="place-yaw-field">
+            <span>Direction</span>
+            <input id="place-yaw" type="range" min="-180" max="180" step="1" aria-label="Direction on the plan" />
+            <span id="place-yaw-val" class="muted"></span>
+          </label>
+          <div class="jumps">
+            <span>Jumps from here</span>
+            <div id="jump-list"></div>
+            <select id="add-jump" aria-label="Add a place to jump to"></select>
+            <p class="fine">Inside this photo, only these places appear as places you can walk to. The link is one way.</p>
+          </div>
+          <button id="walk" class="btn primary" type="button">Step inside</button>
+          <button id="remove-pin" class="btn ghost danger" type="button">Remove pin</button>
+          <p class="fine">The arrow is the direction this place faces on the plan. Day and night share it. Look, under each photo, turns that picture so the two shots line up. Turn the arrow until a step to the next photo shows up in the right part of the room.</p>
+        </div>
+        <div id="plan-opacity-wrap" hidden>
+          <label class="field">
+            <span>Floor plan opacity</span>
+            <input id="plan-opacity" type="range" min="0.25" max="1" step="0.01" />
+          </label>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="viewer" hidden>
+    <canvas id="pano"></canvas>
+    <div id="hotspots"></div>
+    <div id="fade"></div>
+    <div id="load-mask"><span id="load-text">Loading photo…</span></div>
+    <div class="viewer-bar">
+      <button id="back" class="btn" type="button">Back to map</button>
+      <input id="viewer-name" type="text" maxlength="48" aria-label="Place name" />
+      <div class="time-toggle" role="group" aria-label="Time of day">
+        <button id="show-day" type="button">Day</button>
+        <button id="show-night" type="button">Night</button>
+      </div>
+      <p id="facing"></p>
+      <div class="yaw-tools">
+        <button id="yaw-left" class="btn ghost" type="button" title="Turn this place left on the plan">Turn left</button>
+        <button id="align" class="btn" type="button" title="Aim this place so this view points to the top of the plan">This view points to the top</button>
+        <button id="yaw-right" class="btn ghost" type="button" title="Turn this place right on the plan">Turn right</button>
+      </div>
+    </div>
+    <canvas id="minimap"></canvas>
+    <p id="viewer-hint">Drag to look around. Click a marker to walk. Day and Night switch the photos of this place.</p>
+    <p id="no-links" hidden>No jumps from this place.</p>
+    <p id="viewer-error" hidden></p>
+    <div id="vr-panel" hidden>
+      <button id="enter-vr" class="btn primary" type="button" hidden>Enter VR</button>
+      <p id="vr-note"></p>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

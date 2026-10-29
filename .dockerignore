@@ -1,0 +1,11 @@
+.git
+**/.git
+**/__pycache__
+**/*.py[cod]
+**/*.tmp
+.DS_Store
+dist
+Dockerfile
+docker-compose.yml
+README.md
+scripts

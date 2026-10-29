@@ -1,0 +1,7 @@
+services:
+  tour:
+    image: home-tour:latest
+    build: .
+    ports:
+      - "${HOST_PORT:-8765}:8765"
+    restart: unless-stopped

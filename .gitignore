@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+content/thumbs/*
+!content/thumbs/.gitkeep
+*.tmp
+.DS_Store
+dist/
