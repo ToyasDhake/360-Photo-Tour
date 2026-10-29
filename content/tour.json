@@ -4,158 +4,206 @@
   "floorplan": null,
   "planOpacity": 0.9,
   "thumbYaw": {
-    "IMG_20240715_175925_00_merged.jpg": 19,
-    "IMG_20240715_180144_00_merged.jpg": -93,
-    "IMG_20240715_180337_00_merged.jpg": 180,
-    "IMG_20240715_180536_00_merged.jpg": -12,
-    "IMG_20240715_180714_00_merged.jpg": -95,
-    "IMG_20240715_180914_00_merged.jpg": -83,
-    "IMG_20240715_181108_00_merged.jpg": -26,
-    "IMG_20240715_181409_00_merged.jpg": 71,
-    "IMG_20240715_181610_00_merged.jpg": -5,
-    "IMG_20240715_182411_00_merged.jpg": 85,
-    "IMG_20240715_182537_00_merged.jpg": -97,
-    "IMG_20240715_222315_00_merged.jpg": -105,
-    "IMG_20240715_222534_00_merged.jpg": -118,
-    "IMG_20240715_222623_00_merged.jpg": -180,
-    "IMG_20240715_222914_00_merged.jpg": 21,
-    "IMG_20240715_223002_00_merged.jpg": -90,
-    "IMG_20240715_223320_00_merged.jpg": 12,
+    "IMG_20240715_175925_00_merged.jpg": -126,
+    "IMG_20240715_180144_00_merged.jpg": 143,
+    "IMG_20240715_180337_00_merged.jpg": -158,
+    "IMG_20240715_180536_00_merged.jpg": 85,
+    "IMG_20240715_180714_00_merged.jpg": -93,
+    "IMG_20240715_180914_00_merged.jpg": -6,
+    "IMG_20240715_181108_00_merged.jpg": -98,
+    "IMG_20240715_181409_00_merged.jpg": 84,
+    "IMG_20240715_181610_00_merged.jpg": -7,
+    "IMG_20240715_182411_00_merged.jpg": 91,
+    "IMG_20240715_182537_00_merged.jpg": -98,
+    "IMG_20240715_194334_00_merged.jpg": 2,
+    "IMG_20240715_222315_00_merged.jpg": 124,
+    "IMG_20240715_222359_00_merged.jpg": -150,
+    "IMG_20240715_222449_00_merged.jpg": 102,
+    "IMG_20240715_222534_00_merged.jpg": -76,
+    "IMG_20240715_222811_00_merged.jpg": -17,
+    "IMG_20240715_222914_00_merged.jpg": 102,
+    "IMG_20240715_223002_00_merged.jpg": -82,
+    "IMG_20240715_223320_00_merged.jpg": 9,
     "IMG_20240715_223417_00_merged.jpg": -2,
-    "IMG_20240715_223636_00_merged.jpg": -71,
+    "IMG_20240715_223513_00_merged.jpg": 102,
+    "IMG_20240715_223636_00_merged.jpg": -67,
     "IMG_20240715_223747_00_merged.jpg": 9,
-    "IMG_20240715_194334_00_merged.jpg": -4
+    "IMG_20240715_222623_00_merged.jpg": 106
   },
   "spots": [
     {
       "id": "mvu3owigz52o5p",
       "name": "Pin 1",
-      "nx": 0.27160382593680915,
-      "ny": 0.7632652928750445,
-      "yaw": 0,
+      "nx": 0.34036288862765224,
+      "ny": 0.6274805892418669,
+      "yaw": -1,
       "day": "IMG_20240715_180714_00_merged.jpg",
       "night": "IMG_20240715_222623_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3p9a4nucbm7",
+        "mvu3qlau4xyj2f"
+      ]
     },
     {
       "id": "mvu3p9a4nucbm7",
       "name": "Pin 2",
-      "nx": 0.27335552730410534,
-      "ny": 0.6081146003430958,
-      "yaw": 0,
+      "nx": 0.34030976440487776,
+      "ny": 0.5747984276986129,
+      "yaw": -90,
       "day": "IMG_20240715_180914_00_merged.jpg",
       "night": "IMG_20240715_222811_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3owigz52o5p",
+        "mvu3qlau4xyj2f"
+      ]
     },
     {
       "id": "mvu3qlau4xyj2f",
       "name": "Pin 3",
-      "nx": 0.2751072286714015,
-      "ny": 0.45671755359821053,
-      "yaw": 0,
+      "nx": 0.33930301522465084,
+      "ny": 0.5272977095216849,
+      "yaw": -180,
       "day": "IMG_20240715_180536_00_merged.jpg",
       "night": "IMG_20240715_222534_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3p9a4nucbm7",
+        "mvu3owigz52o5p",
+        "mvu3t5yomm0z5e"
+      ]
     },
     {
       "id": "mvu3qwu6pgv4dz",
       "name": "Pin 4",
-      "nx": 0.19803236851036896,
-      "ny": 0.33660088841218566,
-      "yaw": 0,
+      "nx": 0.2784421370645523,
+      "ny": 0.5121260040906918,
+      "yaw": 90,
       "day": "IMG_20240715_180337_00_merged.jpg",
       "night": "IMG_20240715_222449_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3t5yomm0z5e"
+      ]
     },
     {
       "id": "mvu3r6wtelt23p",
       "name": "Pin 5",
-      "nx": 0.3171480614865102,
-      "ny": 0.08635783594130081,
-      "yaw": 0,
+      "nx": 0.29631018137470905,
+      "ny": 0.35170218886087323,
+      "yaw": -89,
       "day": "IMG_20240715_180144_00_merged.jpg",
       "night": "IMG_20240715_222359_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3sqxu12anne",
+        "mvu3ranouts5hb"
+      ]
     },
     {
       "id": "mvu3ranouts5hb",
       "name": "Pin 6",
-      "nx": 0.19890821919401705,
-      "ny": 0.0025264133635543307,
-      "yaw": 0,
+      "nx": 0.2668513619373184,
+      "ny": 0.30997601436385136,
+      "yaw": -180,
       "day": "IMG_20240715_175925_00_merged.jpg",
       "night": "IMG_20240715_222315_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3r6wtelt23p"
+      ]
     },
     {
       "id": "mvu3sqxu12anne",
       "name": "Pin 7",
-      "nx": 0.29262424234436346,
-      "ny": 0.22524273006264195,
-      "yaw": 0,
+      "nx": 0.3335179475712657,
+      "ny": 0.4421752785378114,
+      "yaw": -180,
       "day": "IMG_20240715_181108_00_merged.jpg",
       "night": "IMG_20240715_222914_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3r6wtelt23p",
+        "mvu3t5yomm0z5e"
+      ]
     },
     {
       "id": "mvu3t5yomm0z5e",
       "name": "Pin 8",
-      "nx": 0.35305793951608216,
-      "ny": 0.30031564580390735,
+      "nx": 0.3554321342127608,
+      "ny": 0.48027354198044664,
       "yaw": 0,
       "day": "IMG_20240715_181409_00_merged.jpg",
       "night": "IMG_20240715_223002_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3qlau4xyj2f",
+        "mvu3tr1mzm0afv",
+        "mvu3wre3kxe8sg",
+        "mvu3qwu6pgv4dz",
+        "mvu3sqxu12anne"
+      ]
     },
     {
       "id": "mvu3tr1mzm0afv",
       "name": "Pin 9",
-      "nx": 0.47830458727776015,
-      "ny": 0.33910331893689455,
+      "nx": 0.4091355311762805,
+      "ny": 0.5061655624670968,
       "yaw": 91,
       "day": "IMG_20240715_181610_00_merged.jpg",
       "night": "IMG_20240715_223320_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3t5yomm0z5e",
+        "mvu3wre3kxe8sg",
+        "mvu3tzua64q67n",
+        "mvu3u36xirjace"
+      ]
     },
     {
       "id": "mvu3tzua64q67n",
       "name": "Pin 10",
-      "nx": 0.4791804379614082,
-      "ny": 0.48424428937000785,
+      "nx": 0.4076013988621911,
+      "ny": 0.5517601043553176,
       "yaw": 90,
       "day": "IMG_20240715_181910_00_merged.jpg",
       "night": "IMG_20240715_223417_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3tr1mzm0afv",
+        "mvu3u36xirjace"
+      ]
     },
     {
       "id": "mvu3u36xirjace",
       "name": "Pin 11",
-      "nx": 0.4791804379614082,
-      "ny": 0.6293852598031211,
-      "yaw": 0,
+      "nx": 0.40636930330483156,
+      "ny": 0.6122063412025455,
+      "yaw": 1,
       "day": "IMG_20240715_182411_00_merged.jpg",
       "night": "IMG_20240715_223513_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3tr1mzm0afv",
+        "mvu3tzua64q67n"
+      ]
     },
     {
       "id": "mvu3wre3kxe8sg",
       "name": "Pin 12",
-      "nx": 0.4783045872777601,
-      "ny": 0.1740976283403948,
+      "nx": 0.40415265692489,
+      "ny": 0.40044858819894213,
       "yaw": -180,
       "day": "IMG_20240715_182537_00_merged.jpg",
       "night": "IMG_20240715_223636_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3t5yomm0z5e",
+        "mvu3ww4zilf5st",
+        "mvu3tr1mzm0afv"
+      ]
     },
     {
       "id": "mvu3ww4zilf5st",
       "name": "Pin 13",
-      "nx": 0.4783045872777601,
-      "ny": 0.04772247697176695,
+      "nx": 0.40522766420083695,
+      "ny": 0.31365654290583317,
       "yaw": -90,
       "day": "IMG_20240715_194334_00_merged.jpg",
       "night": "IMG_20240715_223747_00_merged.jpg",
-      "links": []
+      "links": [
+        "mvu3wre3kxe8sg",
+        "mvu3tr1mzm0afv"
+      ]
     }
   ],
   "board": {
