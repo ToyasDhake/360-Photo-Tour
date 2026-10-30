@@ -38,7 +38,6 @@ body.visit {
 }
 
 body.visit #app,
-body.visit .viewer-bar,
 body.visit #minimap,
 body.visit #viewer-hint,
 body.visit #no-links,
@@ -643,6 +642,30 @@ body.visit .hotspot .name {
   background: rgba(16, 14, 11, 0.72);
   border: 1px solid var(--line);
   backdrop-filter: blur(10px);
+}
+
+body.visit .viewer-bar {
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  left: auto;
+  gap: 0;
+  padding: 4px;
+  border-radius: 999px;
+}
+
+body.visit .viewer-bar > :not(.time-toggle) {
+  display: none;
+}
+
+body.visit .time-toggle button {
+  min-width: 72px;
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 15px;
+}
+
+body.xr .viewer-bar {
+  display: none !important;
 }
 
 .time-toggle {

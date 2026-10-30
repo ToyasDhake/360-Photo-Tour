@@ -75,6 +75,7 @@ const els = {
   fade: $("fade"),
   loadMask: $("load-mask"),
   loadText: $("load-text"),
+  viewerBar: $("viewer-bar"),
   back: $("back"),
   viewerName: $("viewer-name"),
   facing: $("facing"),
@@ -2303,7 +2304,9 @@ function onXREnd() {
   vr.refSpace = null;
   vr.layer = null;
   vr.markers = [];
+  document.body.classList.remove("xr");
   if (vr.supported) els.enterVr.hidden = false;
+  updateTimeToggle();
   if (!viewerLoop && !els.viewer.hidden && viewerPlaceId) startViewerLoop();
 }
 
@@ -2335,12 +2338,16 @@ async function enterVR() {
       hand.forward = false;
     }
     els.enterVr.hidden = true;
+    document.body.classList.add("xr");
+    updateTimeToggle();
     session.requestAnimationFrame(onXRFrame);
   } catch (error) {
     xrSession = null;
     vr.aligned = false;
     vr.refSpace = null;
     vr.layer = null;
+    document.body.classList.remove("xr");
+    updateTimeToggle();
     if (!viewerLoop && viewerPlaceId && !els.viewer.hidden) startViewerLoop();
     session.end().catch((error) => {
       log.warn("vr session did not close", { error });
@@ -2522,6 +2529,9 @@ function updateTimeToggle() {
   els.showNight.classList.toggle("on", open && viewerTime === "night");
   els.showDay.title = spot?.day ? "Show the day photo" : "No day photo here";
   els.showNight.title = spot?.night ? "Show the night photo" : "No night photo here";
+  if (!adminMode && els.viewerBar) {
+    els.viewerBar.hidden = Boolean(xrSession) || !(open && spot.day && spot.night);
+  }
 }
 
 async function openViewer(id, time) {
