@@ -29,12 +29,12 @@
     "IMG_20240715_223513_00_merged.jpg": 102,
     "IMG_20240715_223636_00_merged.jpg": -67,
     "IMG_20240715_223747_00_merged.jpg": 9,
-    "IMG_20240715_225824_00_merged.jpg": 171,
-    "IMG_20240715_225521_00_merged.jpg": 91,
-    "IMG_20240715_224305_00_merged.jpg": 126,
     "IMG_20240715_223935_00_merged.jpg": 126,
+    "IMG_20240715_224305_00_merged.jpg": 126,
     "IMG_20240715_224407_00_merged.jpg": -74,
-    "IMG_20240715_224640_00_merged.jpg": 134
+    "IMG_20240715_224640_00_merged.jpg": 134,
+    "IMG_20240715_225521_00_merged.jpg": 91,
+    "IMG_20240715_225824_00_merged.jpg": 171
   },
   "spots": [
     {
@@ -83,8 +83,7 @@
         "mvu3qwu6pgv4dz",
         "mvu3sqxu12anne",
         "mvu3r6wtelt23p",
-        "mvu3ranouts5hb",
-        "mvu71trtfbqj03"
+        "mvu3ranouts5hb"
       ]
     },
     {
@@ -100,8 +99,7 @@
         "mvu3qlau4xyj2f",
         "mvu3sqxu12anne",
         "mvu3r6wtelt23p",
-        "mvu3ranouts5hb",
-        "mvu71trtfbqj03"
+        "mvu3ranouts5hb"
       ]
     },
     {
@@ -118,9 +116,7 @@
         "mvu3qwu6pgv4dz",
         "mvu3t5yomm0z5e",
         "mvu3p9a4nucbm7",
-        "mvu3qlau4xyj2f",
-        "mvu71trtfbqj03",
-        "mvu755zhxp2pu5"
+        "mvu3qlau4xyj2f"
       ]
     },
     {
@@ -137,7 +133,6 @@
         "mvu3qlau4xyj2f",
         "mvu3qwu6pgv4dz",
         "mvu3sqxu12anne",
-        "mvu71trtfbqj03",
         "mvu755zhxp2pu5"
       ]
     },
@@ -157,8 +152,7 @@
         "mvu3p9a4nucbm7",
         "mvu3owigz52o5p",
         "mvu3ranouts5hb",
-        "mvu3tr1mzm0afv",
-        "mvu71trtfbqj03"
+        "mvu3tr1mzm0afv"
       ]
     },
     {
@@ -179,18 +173,14 @@
         "mvu3ranouts5hb",
         "mvu3r6wtelt23p",
         "mvu3owigz52o5p",
-        "mvu3ww4zilf5st",
-        "mvu71trtfbqj03",
-        "mvu755zhxp2pu5",
-        "mvu78onk25kslj",
-        "mvu7bmi5v30fgl"
+        "mvu3ww4zilf5st"
       ]
     },
     {
       "id": "mvu3tr1mzm0afv",
       "name": "Pin 9",
       "nx": 0.4091355311762805,
-      "ny": 0.5061655624670968,
+      "ny": 0.5059869910385253,
       "yaw": 91,
       "day": "IMG_20240715_181610_00_merged.jpg",
       "night": "IMG_20240715_223320_00_merged.jpg",
@@ -200,8 +190,7 @@
         "mvu3tzua64q67n",
         "mvu3u36xirjace",
         "mvu3ww4zilf5st",
-        "mvu3sqxu12anne",
-        "mvu7bmi5v30fgl"
+        "mvu3sqxu12anne"
       ]
     },
     {
@@ -244,9 +233,7 @@
         "mvu3t5yomm0z5e",
         "mvu3ww4zilf5st",
         "mvu3tr1mzm0afv",
-        "mvu3tzua64q67n",
-        "mvu78onk25kslj",
-        "mvu7bmi5v30fgl"
+        "mvu3tzua64q67n"
       ]
     },
     {
@@ -261,8 +248,7 @@
         "mvu3wre3kxe8sg",
         "mvu3tr1mzm0afv",
         "mvu3t5yomm0z5e",
-        "mvu3tzua64q67n",
-        "mvu78onk25kslj"
+        "mvu3tzua64q67n"
       ]
     },
     {
@@ -274,13 +260,8 @@
       "day": null,
       "night": "IMG_20240715_225824_00_merged.jpg",
       "links": [
-        "mvu3ranouts5hb",
-        "mvu3r6wtelt23p",
-        "mvu3sqxu12anne",
-        "mvu3qwu6pgv4dz",
-        "mvu3t5yomm0z5e",
-        "mvu3qlau4xyj2f",
-        "mvu755zhxp2pu5"
+        "mvu755zhxp2pu5",
+        "mvu7bmi5v30fgl"
       ]
     },
     {
@@ -293,23 +274,20 @@
       "night": "IMG_20240715_225521_00_merged.jpg",
       "links": [
         "mvu3ranouts5hb",
-        "mvu3r6wtelt23p",
-        "mvu71trtfbqj03",
-        "mvu3t5yomm0z5e"
+        "mvu71trtfbqj03"
       ]
     },
     {
       "id": "mvu78onk25kslj",
       "name": "Pin 16",
       "nx": 0.4125941692311167,
-      "ny": 0.3347402367476293,
+      "ny": 0.3345616653190579,
       "yaw": -92,
       "day": null,
       "night": "IMG_20240715_224407_00_merged.jpg",
       "links": [
-        "mvu3wre3kxe8sg",
-        "mvu3t5yomm0z5e",
-        "mvu3ww4zilf5st"
+        "mvu7bmi5v30fgl",
+        "mvu3wre3kxe8sg"
       ]
     },
     {
@@ -321,9 +299,8 @@
       "day": null,
       "night": "IMG_20240715_224640_00_merged.jpg",
       "links": [
-        "mvu3t5yomm0z5e",
-        "mvu3wre3kxe8sg",
-        "mvu3tr1mzm0afv"
+        "mvu71trtfbqj03",
+        "mvu78onk25kslj"
       ]
     }
   ],
