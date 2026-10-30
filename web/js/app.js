@@ -1570,17 +1570,23 @@ uniform sampler2D uMarkTex;
 uniform vec4 uColor;
 uniform float uMode;
 void main() {
+  vec2 p = vUv * 2.0 - 1.0;
+  float d = length(p);
   if (uMode < 0.5) {
-    vec2 p = vUv * 2.0 - 1.0;
-    float d = length(p);
     if (d > 1.0) discard;
-    float rim = smoothstep(0.55, 0.82, d);
-    fragColor = vec4(mix(uColor.rgb, vec3(1.0), rim), uColor.a * smoothstep(1.0, 0.86, d));
+    float edge = smoothstep(1.0, 0.9, d);
+    float ring = smoothstep(0.68, 0.84, d);
+    vec3 rgb = mix(uColor.rgb, vec3(1.0), ring);
+    float alpha = mix(uColor.a, 0.95, ring) * edge;
+    fragColor = vec4(rgb, alpha);
   } else if (uMode < 1.5) {
     fragColor = texture(uMarkTex, vUv);
     if (fragColor.a < 0.05) discard;
-  } else {
+  } else if (uMode < 2.5) {
     fragColor = uColor;
+  } else {
+    if (d > 1.0) discard;
+    fragColor = vec4(0.0, 0.0, 0.0, 0.32 * smoothstep(1.0, 0.15, d));
   }
 }`;
 
@@ -1974,6 +1980,17 @@ function raySphere(origin, direction, center, radius) {
   return t > 0.05 ? t : null;
 }
 
+// Headset floor positions are this many times farther from the current place
+// than on the plan. Bearings stay exact, so a jump still leaves the way back
+// on the real direction.
+const VR_GRID_SCALE = 1;
+
+function vrMarkerDirection(aim) {
+  const depression = clamp(-aim.imagePitch, 0, 1.2);
+  const pitch = -Math.atan(Math.tan(depression) / VR_GRID_SCALE);
+  return dirFromYawPitch(aim.imageYaw, pitch);
+}
+
 function markerList() {
   const spot = viewerSpot();
   if (!spot) return [];
@@ -1982,8 +1999,9 @@ function markerList() {
     return {
       id: other.id,
       name: other.name,
-      panDir: dirFromYawPitch(aim.imageYaw, aim.imagePitch),
+      panDir: vrMarkerDirection(aim),
       distance: aim.meters,
+      scale: aim.scale,
     };
   });
 }
@@ -2085,19 +2103,26 @@ function drawMarkerMesh(data, mode, color, texture) {
   gl.drawArrays(gl.TRIANGLES, 0, data.length / 5);
 }
 
-function markerPose(panDir, distance) {
-  const refDir = rotateY(panDir, -vr.yawOffset);
-  return {
-    refDir,
-    center: vecAdd(vr.headPos, vecScale(refDir, distance)),
-  };
+// Far enough that the disc is drawn into the photo instead of floating in front of it.
+const MARKER_SHELL = 48;
+
+function markerPlacement(marker) {
+  const refDir = rotateY(marker.panDir, -vr.yawOffset);
+  const center = vecAdd(vr.headPos, vecScale(refDir, MARKER_SHELL));
+  const grow = 1 + 0.04 * Math.sin((vr.lastTime || 0) * 0.0026);
+  const radius = 0.046 * (marker.scale || 1) * MARKER_SHELL * grow;
+  return { refDir, center, radius };
 }
 
-function flatBasis(refDir, radius) {
-  const flat = vecNorm([refDir[0], 0, refDir[2]]);
+function floorDiscAxes(refDir, radius) {
+  let flat = [refDir[0], 0, refDir[2]];
+  const span = Math.hypot(flat[0], flat[2]);
+  flat = span < 1e-4 ? [0, 0, -1] : [flat[0] / span, 0, flat[2] / span];
+  const drop = clamp(-refDir[1], 0.08, 1);
+  const stretch = clamp(0.34 / drop, 1, 3);
   const right = vecScale(vecNorm(vecCross([0, 1, 0], flat)), radius);
-  const forward = vecScale(flat, radius);
-  return { right, forward };
+  const forward = vecScale(flat, radius * stretch);
+  return { right, forward, reach: radius * stretch };
 }
 
 function billboardBasis(center, halfW, halfH) {
@@ -2121,8 +2146,9 @@ function collectControllerHits(frame) {
     const direction = vecNorm(quatRotate(pose.transform.orientation, [0, 0, -1]));
     let best = null;
     for (const marker of vr.markers) {
-      const { center } = markerPose(marker.panDir, marker.distance);
-      const t = raySphere(origin, direction, center, Math.max(0.28, marker.distance * 0.16));
+      const place = markerPlacement(marker);
+      const axes = floorDiscAxes(place.refDir, place.radius);
+      const t = raySphere(origin, direction, place.center, axes.reach);
       if (t == null) continue;
       if (!best || t < best.t) best = { id: marker.id, t, source };
     }
@@ -2194,6 +2220,13 @@ function drawVrEye(view, rays, showHint) {
   const viewMatrix = mat4Invert(view.transform.matrix);
   if (!viewMatrix) return;
   const mvp = mat4Multiply(view.projectionMatrix, viewMatrix);
+  const markerCam = new Float32Array(view.transform.matrix);
+  markerCam[12] = vr.headPos[0];
+  markerCam[13] = vr.headPos[1];
+  markerCam[14] = vr.headPos[2];
+  const markerView = mat4Invert(markerCam);
+  if (!markerView) return;
+  const markerMvp = mat4Multiply(view.projectionMatrix, markerView);
 
   gl.disable(gl.BLEND);
   gl.useProgram(glContext.program);
@@ -2212,7 +2245,7 @@ function drawVrEye(view, rays, showHint) {
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
   gl.useProgram(glContext.markProgram);
   gl.bindVertexArray(glContext.markerVao);
-  gl.uniformMatrix4fv(glContext.markMvp, false, mvp);
+  gl.uniformMatrix4fv(glContext.markMvp, false, markerMvp);
 
   const aimed = new Set();
   for (const hit of rays) {
@@ -2220,19 +2253,19 @@ function drawVrEye(view, rays, showHint) {
   }
   for (const marker of vr.markers) {
     const hot = aimed.has(marker.id);
-    const { refDir, center } = markerPose(marker.panDir, marker.distance);
-    const radius = hot ? 0.2 : 0.16;
-    const { right, forward } = flatBasis(refDir, radius);
+    const place = markerPlacement(marker);
+    const axes = floorDiscAxes(place.refDir, place.radius);
+    const shadow = floorDiscAxes(place.refDir, place.radius * 1.35);
+    const shadowQuad = [];
+    pushQuad(shadowQuad, place.center, shadow.right, shadow.forward);
+    drawMarkerMesh(shadowQuad, 3, [0, 0, 0, 0.32], null);
     const disc = [];
-    pushQuad(disc, center, right, forward);
-    drawMarkerMesh(disc, 0, hot ? [0.89, 0.53, 0.29, 0.92] : [0.95, 0.93, 0.88, 0.72], null);
-    const labelScale = marker.distance / 2.4;
-    const labelPos = vecAdd(center, [0, 0.2 * labelScale, 0]);
-    const basis = billboardBasis(labelPos, 0.34 * labelScale, 0.085 * labelScale);
-    const label = [];
-    pushQuad(label, labelPos, basis.right, basis.up);
-    drawMarkerMesh(label, 1, [1, 1, 1, 1], labelTexture(marker.name || "Walk", false));
+    pushQuad(disc, place.center, axes.right, axes.forward);
+    const fill = hot ? [0.89, 0.53, 0.29, 0.55] : [1, 1, 1, 0.22];
+    drawMarkerMesh(disc, 0, fill, null);
   }
+
+  gl.uniformMatrix4fv(glContext.markMvp, false, mvp);
 
   for (const ray of rays) {
     const endDistance = ray.hit ? ray.hit.t : 3.2;
