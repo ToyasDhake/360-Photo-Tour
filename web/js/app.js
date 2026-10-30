@@ -89,6 +89,7 @@ const els = {
   viewerError: $("viewer-error"),
   vrPanel: $("vr-panel"),
   enterVr: $("enter-vr"),
+  dismissVr: $("dismiss-vr"),
   vrNote: $("vr-note"),
 };
 
@@ -2305,7 +2306,10 @@ function onXREnd() {
   vr.layer = null;
   vr.markers = [];
   document.body.classList.remove("xr");
-  if (vr.supported) els.enterVr.hidden = false;
+  if (vr.supported && !vrHidden()) {
+    els.vrPanel.hidden = false;
+    els.enterVr.hidden = false;
+  }
   updateTimeToggle();
   if (!viewerLoop && !els.viewer.hidden && viewerPlaceId) startViewerLoop();
 }
@@ -2356,8 +2360,27 @@ async function enterVR() {
   }
 }
 
+const VR_HIDE_KEY = "home-tour-hide-vr";
+
+function vrHidden() {
+  try {
+    return localStorage.getItem(VR_HIDE_KEY) === "1";
+  } catch (error) {
+    return document.documentElement.classList.contains("hide-vr");
+  }
+}
+
+function hideVRPrompt() {
+  try {
+    localStorage.setItem(VR_HIDE_KEY, "1");
+  } catch (error) {}
+  document.documentElement.classList.add("hide-vr");
+  if (els.vrPanel) els.vrPanel.hidden = true;
+  if (els.enterVr) els.enterVr.hidden = true;
+}
+
 async function prepareVR() {
-  if (adminMode || !els.vrPanel) return;
+  if (adminMode || !els.vrPanel || vrHidden()) return;
   const headset = /Quest|OculusBrowser/i.test(navigator.userAgent);
   if (!window.isSecureContext) {
     if (!headset) return;
@@ -3032,6 +3055,7 @@ async function boot() {
         els.viewerError.textContent = error.message || "Could not enter VR.";
       });
     });
+    if (els.dismissVr) els.dismissVr.addEventListener("click", hideVRPrompt);
     prepareVR();
   }
   new ResizeObserver(() => {

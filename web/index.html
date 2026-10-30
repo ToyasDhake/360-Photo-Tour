@@ -5,13 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Home tour</title>
   <base href="/" />
+  <link rel="icon" href="/logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@400;500;600&display=swap" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=vr-cancel2" />
 </head>
 <body>
-  <script>if (!/^\/admin\/?$/.test(location.pathname)) document.body.classList.add("visit");</script>
+  <script>
+    if (!/^\/admin\/?$/.test(location.pathname)) document.body.classList.add("visit");
+    try {
+      if (localStorage.getItem("home-tour-hide-vr") === "1") document.documentElement.classList.add("hide-vr");
+    } catch (error) {}
+  </script>
   <div id="app">
     <header class="top">
       <div class="brand">
@@ -139,10 +145,11 @@
     <p id="viewer-error" hidden></p>
     <div id="vr-panel" hidden>
       <button id="enter-vr" class="btn primary" type="button" hidden>Enter VR</button>
+      <button id="dismiss-vr" class="btn ghost" type="button" onclick="document.documentElement.classList.add('hide-vr');document.getElementById('vr-panel').hidden=true;try{localStorage.setItem('home-tour-hide-vr','1')}catch(e){}">Cancel</button>
       <p id="vr-note"></p>
     </div>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js?v=vr-cancel"></script>
 </body>
 </html>

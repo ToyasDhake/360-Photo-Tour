@@ -746,12 +746,18 @@ body.xr .viewer-bar {
   width: min(440px, calc(100% - 32px));
 }
 
-body:not(.visit) #vr-panel { display: none !important; }
+body:not(.visit) #vr-panel,
+html.hide-vr #vr-panel { display: none !important; }
 
-#enter-vr {
+#enter-vr,
+#dismiss-vr {
   width: 100%;
   padding: 16px 18px;
   font-size: 18px;
+}
+
+#dismiss-vr {
+  background: rgba(16, 14, 11, 0.72);
 }
 
 #vr-note {
